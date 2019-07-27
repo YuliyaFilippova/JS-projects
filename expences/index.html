@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+	<head>
+	<meta charset='utf-8'>
+	<title>my first js page</title>
+	<link rel="stylesheet" href="style.css">
+	</head>
+
+	<body>
+	    <header>
+			<h2>Таблица учета расходов</h2>
+		</header> 
+		<table>
+			<thead>
+			  <tr>
+				<th></th>
+				<th width="40%">Тип расхода</th>
+				<th width="20%">Потраченная сумма</th>
+				<th width="20%">Дата расхода</th>
+				<th width="30"></th>
+			  </tr>
+			</thead>
+			  <tr>
+				<td>No</td>
+				<td><input id="type"></td>
+				<td><input id="rate"></td>
+				<td><input id="date" type="date"></td>
+				<td><button id="add" class="add">Add</button></td>
+			  </tr>
+			  <tr>
+				<td colspan='5'><table id="expensesList"></table></td>
+			  </tr>
+			  <tr><td colspan='5'><p id="result"></p></td></tr>
+			</table>
+		<footer>Jaya Inc. 2014</footer>
+		<script type="text/javascript" src="app.js"></script>
+		<!--script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+		<script type="text/javascript" src="app_jquery.js"></script-->
+	</body>
+</html>

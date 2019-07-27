@@ -1,0 +1,102 @@
+html, body{
+	padding:0;
+	margin:0;
+	font: normal 13px Arial;
+  text-align: center;
+}
+
+header h2{
+	color:#99f;
+	text-align: center;
+	margin: 30px;
+	}
+
+table, tbody{
+	width: 800px;
+	padding: 2px;
+	margin: 0 auto;
+	border: 1px dotted #606;
+  border-radius: 10px;
+	background-color: #F4E9F2;
+	box-shadow: 5px 5px 6px 0 rgba(0, 3, 0, 0.2),
+        0 25px 50px 0 rgba(0, 0, 0, 0.15);
+}
+
+tr, th, td{
+	/*border:1px dotted #606;*/
+	padding: 2px;
+	margin: 2px;
+	text-align: center;
+}
+
+th{
+	font:normal bold 1.1em Arial;
+	color:#606;
+}
+
+select, input, textarea{
+	width: 95%;
+	height: 20px;
+  padding: 2px;
+	border: 1px solid #606;
+}
+
+
+button{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 100%;
+  background: none;
+  font-size: 100%;
+  vertical-align: baseline;
+  font-family: inherit;
+  color: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+
+footer{
+  display: block;
+  line-height: 40px;
+  margin: 0 auto;
+  font-weight: bold;
+  font-style: italic;
+
+}
+
+.add, .delete{
+	display: block;
+	width: 45px;
+  	height: 22px;
+  	margin: auto 0;
+  	border: 1px solid #000;
+  	font: bold 1.3em inherit;
+  	text-transform: uppercase;
+  	color: #606;
+  	border-radius: 10px;
+  	box-shadow: inset 0 2px 2px 2px rgba(0.5, 0.2, 0.5, 0.2);
+  	-webkit-transition: all 0.2s;
+  	-moz-transition: all 0.2s;
+  	-ms-transition: all 0.2s;
+  	-o-transition: all 0.2s;
+  	transition: all 0.2s;
+}
+
+.add:hover, .delete:hover{
+	text-shadow: 0 0 1px #606,
+         0 0 10px rgba(199, 107, 107, 0.8);
+  	-webkit-transform: scale(1.2);
+  	-moz-transform: scale(1.2);
+  	-ms-transform: scale(1.2);
+  	-o-transform: scale(1.2);
+  	transform: scale(1.2);
+};
+
+#result{
+	font: bold 1.3em inherit;
+	color:#606;
+}
