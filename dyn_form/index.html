@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Dynamic Form</title>
+	<!--script src="DYN_form.js" defer></script-->
+	<style>
+		.labelWidth { width: 400px; }
+
+		.formBorder {
+			margin-left: 20px; 
+			padding: 3px; border: 
+			solid 1px lightblue; 
+			outline: none;
+			background: transparent;
+		}
+
+		.longText { width: 70%;}
+		.number { width: 100px; }
+		.email { width: 30%; }
+		.textarea {width: 70%; height: 100px;}
+
+		button {
+			border: solid 1px green;
+			background: lightblue;
+			padding: 5px 10px;
+			outline: none;
+			cursor: pointer;
+		}
+
+	</style>
+</head>
+<body>
+	
+	<button type="button">Сгенерировать форму</button>
+
+	<script src="jquery-3.4.1.min.js"></script>
+
+	<script>
+
+var flag = true; 
+
+document.querySelector('button').addEventListener('click', dataLoad);
+
+function dataLoad() {
+        $.ajax("data.json",
+            { type:'GET', dataType:'json', success:success, error:errorHandler }
+        );
+    }
+
+function success(data) {
+        console.log('загруженные через AJAX данные:');
+        console.log(data);
+        data.forEach(drawForm);
+
+        // или вариант, когда по клику сначала подгружается одна форма, потом вторая: 
+        /*for (let i=0; i<data.length; i++) {
+          var formDef1 = data[0];
+          var formDef2 = data[1];
+          }
+          if (flag) {
+            flag = false;
+            drawForm(formDef1);
+          }
+          else {
+            drawForm(formDef2);
+            flag = true;
+          }
+*/
+    }
+
+function errorHandler(jqXHR,statusStr,errorStr) {
+        console.log(statusStr+'  '+errorStr);
+    }
+
+
+
+function createElement(type, options) {
+  var element = document.createElement(type);
+  for (var i in options) {
+    element.setAttribute(i, options[i]);
+  }
+  return element;
+}
+
+function drawForm (formName) {
+  var myForm = createElement('form', {action:'http://fe.it-academy.by/TestForm.php', method: 'post' });
+  myForm.style.cssText =' border-top: solid 1px green; width: 700px; padding: 30px;';
+
+  for (let i=0; i< formName.length; i++) {
+    var divForm = myForm.appendChild(createElement('div'));
+    divForm.style.cssText = 'margin: 5px 10px; padding: 10px;';
+    
+    if (formName[i].label) {
+      var labelCreate = divForm.appendChild(createElement('label', {for: " "}));
+      labelCreate.style.width = '400px';
+      labelCreate.innerHTML = formName[i].label;
+    }
+    else divForm.appendChild(createElement('span'));
+        
+    var typeItem = formName[i].kind;
+    switch (typeItem) {
+        case 'longtext':
+          divForm.appendChild(createElement('input', {type: 'text', name: formName[i].name})).className ='formBorder longText';
+          break;
+        case 'number': 
+          divForm.appendChild(createElement('input', {type: 'number', name: formName[i].name})).className ='formBorder number';
+          break;
+        case 'shorttext':
+          divForm.appendChild(createElement('input', {type: 'email', name: formName[i].name})).className ='formBorder email';
+          break;
+        case 'combo':
+          var selectForm = divForm.appendChild(createElement('select', {name: formName[i].name}));
+          selectForm.className ='formBorder email';
+          for (let j=0; j< formName[i].variants.length; j++ ) {
+            selectForm.appendChild(createElement('option', {value: formName[i].variants[j].value})).innerHTML = formName[i].variants[j].text;
+          }
+          break;
+        case 'radio':
+          for (let j=0; j< formName[i].variants.length; j++ ) {
+            divForm.appendChild(createElement('input', {type: 'radio', name: formName[i].name, id: j})).className ='formBorder';
+            divForm.appendChild(createElement('label', {for: j, value: formName[i].variants[j].value })).innerHTML = formName[i].variants[j].text;
+          }
+          break;
+        case 'check':
+          divForm.appendChild(createElement('input', {type: 'checkbox', name: formName[i].name})).className ='formBorder';
+          break;
+        case 'memo': 
+          divForm.appendChild(createElement('textarea', {type: 'email', name: formName[i].name})).className ='formBorder textarea';
+          break;
+        case 'submit':
+          divForm.appendChild(createElement('button', {type: 'submit'})).innerHTML = formName[i].text;
+          break;
+    } 
+
+    document.querySelector('body').appendChild(myForm).style.marginTop = '20px';
+
+    myForm.addEventListener('submit', validationForm, false);
+  }
+  console.log (myForm);
+}
+
+
+
+function validationForm(e) {
+  e.preventDefault();
+  var inputElem = document.querySelector('input');
+  console.log(inputElem.length);
+}
+	</script>
+
+
+</body>
+</html>
